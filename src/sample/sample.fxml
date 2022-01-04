@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Pane fx:id="simPane" onMouseClicked="#gridClicked" prefHeight="550.0" prefWidth="600.0" />
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="vButton" mnemonicParsing="false" onAction="#vPress" text="Viscous">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></Button>
+            <Button fx:id="sButton" mnemonicParsing="false" onAction="#sPress" text="Standard" />
+            <Button fx:id="fButton" mnemonicParsing="false" onAction="#fPress" text="Fluid">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></Button>
+            <CheckBox fx:id="autoUpdate" mnemonicParsing="false" text="Auto-Update">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </CheckBox>
+         </children></HBox>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#newGrid" text="New Grid">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></Button>
+            <Button fx:id="percButton" mnemonicParsing="false" onAction="#percolate" text="Percolate" />
+            <Label text="Density:">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin></Label>
+            <TextField fx:id="densityField" prefHeight="25.0" prefWidth="40.0">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin></TextField>
+         </children></HBox>
+   </children>
+</VBox>
