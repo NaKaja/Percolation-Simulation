@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +38,9 @@ public class Controller implements Initializable {
         percButton.setDefaultButton(true);
     }
 
+    /**
+     * Starts the percolation simulation by starting one of the recursive percolation methods
+     */
     public void percolate(ActionEvent actionEvent) {
         grid.unflood(); //Clear the grid of previous simulation
 
@@ -69,6 +72,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Also known as fluidtype 1, this fluid can only travel straight down
+     */
     public void viscPerc(int row, int col){
         if(row < grid.getCellsHigh() - 1){
             if(grid.getCell(row + 1, col).isNotFilledOrFlooded()){ //check space below
@@ -78,6 +84,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Also known as fluidtype 2, this fluid can travel up, down, left, or right
+     */
     public void standardPerc(int row, int col){
         if(row > 0){
             if(grid.getCell(row - 1, col).isNotFilledOrFlooded()){ //check space above
@@ -108,6 +117,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Also known as fluidtype 3, this fluid can travel to any of its 8 neighbors
+     */
     public void fluidPerc(int row, int col){
         if(row > 0){
             if(grid.getCell(row - 1, col).isNotFilledOrFlooded()){ //check space above
@@ -166,6 +178,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Generates a new grid using the density given in the text field on the GUI
+     */
     public void newGrid(ActionEvent actionEvent) {
         try{
             grid = new Grid(simPane, Double.parseDouble(densityField.getText() + "0"));
@@ -175,6 +190,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * Sets the fluid type to viscous, updates visuals accordingly
+     */
     public void vPress(ActionEvent actionEvent) {
         vButton.setStyle("-fx-background-color: #94d6f7");
         sButton.setStyle("");
@@ -182,6 +200,9 @@ public class Controller implements Initializable {
         fluidType = 1;
     }
 
+    /**
+     * Sets the fluid type to standard, updates visuals accordingly
+     */
     public void sPress(ActionEvent actionEvent) {
         vButton.setStyle("");
         sButton.setStyle("-fx-background-color:#94d6f7;");
@@ -189,6 +210,9 @@ public class Controller implements Initializable {
         fluidType = 2;
     }
 
+    /**
+     * Sets the fluid type to fluid, updates visuals accordingly
+     */
     public void fPress(ActionEvent actionEvent) {
         vButton.setStyle("");
         sButton.setStyle("");
@@ -196,6 +220,11 @@ public class Controller implements Initializable {
         fluidType = 3;
     }
 
+    /**
+     * If the grid is clicked, it will toggle the state of the cell
+     * Filled cells become empty, empty cells become filled - flooded cells become filled
+     * If the auto-update box is checked, the percolation simulation will immediately run again
+     */
     public void gridClicked(MouseEvent mouseEvent) {
         grid.clickedCell(mouseEvent.getX(), mouseEvent.getY());
         if(autoUpdate.isSelected()){

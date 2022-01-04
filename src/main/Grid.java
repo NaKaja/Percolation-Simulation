@@ -1,4 +1,4 @@
-package sample;
+package main;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -6,6 +6,9 @@ import javafx.scene.shape.Line;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Grid that represents a solid material or filter that is broken up into cells that are empty or filled (blocked)
+ */
 public class Grid {
 
     private final List<List<Cell>> cells;
@@ -36,10 +39,16 @@ public class Grid {
         initialize(pane);
     }
 
+    /**
+     * Floods a cell and changes its color
+     */
     public void floodCell(int row, int col){
         cells.get(row).get(col).flood();
     }
 
+    /**
+     * Retrieve a cell from the grid by its coordinates
+     */
     public Cell getCell(int row, int col){
         return cells.get(row).get(col);
     }
@@ -52,6 +61,9 @@ public class Grid {
         return cellsHigh;
     }
 
+    /**
+     * Used in the constructor - add cells to the pane and generate the grid lines
+     */
     private void initialize(Pane pane){
         for(List<Cell> row : cells){
             for(Cell cell : row){
@@ -72,6 +84,9 @@ public class Grid {
         }
     }
 
+    /**
+     * For when the grid needs to be cleared, remove fluid from each cell
+     */
     public void unflood() {
         for(int i = 0; i < cellsHigh; i++){
             for(int j = 0; j < cellsWide; j++){
@@ -80,6 +95,9 @@ public class Grid {
         }
     }
 
+    /**
+     * When the grid is clicked, gets the coordinates from the scale and tells that cell to update accordingly
+     */
     public void clickedCell(double x, double y) {
         Cell clicked = cells.get((int)y/Cell.SCALE).get((int)x/Cell.SCALE);
         clicked.clicked();
